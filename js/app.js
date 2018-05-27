@@ -65,13 +65,13 @@ Player.prototype.render = function() {
 
 //Moves player according to input
 Player.prototype.handleInput = function(Arrow){
-if(Arrow == 'left')
+if(Arrow == 'left' && this.x > 0)
 this.x -= 101;
-else if (Arrow == 'right')
+else if (Arrow == 'right' && this.x < 400)
 this.x += 101;
-else if (Arrow == 'down')
+else if (Arrow == 'down' && this.y < 350)
 this.y += 83;
-else if (Arrow == 'up')
+else if (Arrow == 'up' && this.y > 0)
 this.y -= 83;
 };
 // Now instantiate your objects.

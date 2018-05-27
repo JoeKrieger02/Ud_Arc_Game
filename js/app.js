@@ -26,10 +26,17 @@ Enemy.prototype.update = function(dt) {
       this.x = -55;
     }
     //Handle collision with the Player
-    if(this.x == player.x)
+    //START of code chipset that is inspired from GitHub user "brenopolanski"
+    if(player.x < this.x + 80 &&
+        player.x + 60 > this.x &&
+        player.y < this.y + 20 &&
+        30 + player.y > this.y)
     {
+    //END of GitHub code chipset
       player.x=200;
-      player.y=200;
+      player.y=390;
+      lives -= 1;
+      CheckIfGameOver();
     }
 };
 
@@ -65,21 +72,28 @@ Player.prototype.render = function() {
 
 //Moves player according to input
 Player.prototype.handleInput = function(Arrow){
-if(Arrow == 'left' && this.x > 0)
+if(Arrow == 'left' && this.x > 0 && lives >= 0)
 this.x -= 101;
-else if (Arrow == 'right' && this.x < 400)
+else if (Arrow == 'right' && this.x < 400 && lives >= 0)
 this.x += 101;
-else if (Arrow == 'down' && this.y < 350)
+else if (Arrow == 'down' && this.y < 350 && lives >= 0)
 this.y += 83;
-else if (Arrow == 'up' && this.y > 0)
+else if (Arrow == 'up' && this.y > 0 && lives >= 0)
 this.y -= 83;
+else if (Arrow == 'up' && this.y <= 0 && lives >= 0)
+{
+  this.y = 390;
+  this.x = 200;
+  CheckIfWin();
+}
+
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player(200,390);
 var allEnemies = [new Enemy (-200,60,200),new Enemy (-1,145,150),new Enemy (-1,225,100) ];
-
+var lives = 3;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -93,3 +107,18 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+//Added code
+
+function CheckIfGameOver(){
+  if (lives <= 0){
+    alert("GAME OVER ! \n Click OK to retry");
+    location.reload();
+  }
+};
+
+function CheckIfWin(){
+  alert("YOU WIN ! ");
+  location.reload();
+
+};

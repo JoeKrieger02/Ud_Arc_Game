@@ -78,7 +78,7 @@ this.y -= 83;
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player(200,390);
-var allEnemies = [new Enemy (150,30,200),new Enemy (30,100,200),new Enemy (120,160,200)];
+var allEnemies = [new Enemy (-200,60,200),new Enemy (-1,145,150),new Enemy (-1,225,100) ];
 
 
 // This listens for key presses and sends the keys to your

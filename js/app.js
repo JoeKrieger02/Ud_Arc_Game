@@ -41,23 +41,21 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x,y,speed){
+var Player = function(x,y){
   // The image/sprite for our Player
   this.sprite = 'images/char-boy.png';
   //Setting the player initial location
   this.x = x;
   this.y = y;
-  //Setting the player speed : this.speed = speed;
+  //Setting the player speed :
+
 
 };
 
 // Update the Player's position
 Player.prototype.update = function(dt) {
-  this.x += this.speed * dt
   //Update the Player location
-  if(this.x > 505){
-    this.x = -83;
-  }
+
 };
 
 // Draw the player on the screen
@@ -65,22 +63,22 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-//Moves player accroding to input
-Player.prototype.handleInput() = function(Arrow){
+//Moves player according to input
+Player.prototype.handleInput = function(Arrow){
 if(Arrow == 'left')
-this.x -= 83;
+this.x -= 101;
 else if (Arrow == 'right')
-this.x += 83;
-else if (Arrow == 'up')
-this.y += 101;
+this.x += 101;
 else if (Arrow == 'down')
-this.y -= 101;
-}
+this.y += 83;
+else if (Arrow == 'up')
+this.y -= 83;
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var player = new Player();
-var allEnemies = [new Enemy (), new Enemy(), new Enemy];
+var player = new Player(200,390);
+var allEnemies = [new Enemy (150,30,200),new Enemy (30,100,200),new Enemy (120,160,200)];
 
 
 // This listens for key presses and sends the keys to your
@@ -95,5 +93,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-// My functions

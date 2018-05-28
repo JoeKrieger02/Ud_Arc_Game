@@ -36,7 +36,7 @@ Enemy.prototype.update = function(dt) {
       player.x=200;
       player.y=390;
       lives -= 1;
-      CheckIfGameOver();
+
     }
 };
 
@@ -55,14 +55,15 @@ var Player = function(x,y){
   this.x = x;
   this.y = y;
   //Setting the player speed :
-
+  player.x=200;
+  player.y=390;
 
 };
 
-// Update the Player's position
+// Update the Player's
 Player.prototype.update = function(dt) {
-  //Update the Player location
-
+  //Check if game over when player moves.
+  CheckIfGameOver();
 };
 
 // Draw the player on the screen
@@ -108,8 +109,8 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-//Added code
 
+//Check if player has enough "lives" left to continue playing. Otherwise GAME OVER and game restarts.
 function CheckIfGameOver(){
   if (lives <= 0){
     alert("GAME OVER ! \n Click OK to retry");
@@ -117,6 +118,7 @@ function CheckIfGameOver(){
   }
 };
 
+//Check if player has reached water.
 function CheckIfWin(){
   alert("YOU WIN ! ");
   location.reload();
